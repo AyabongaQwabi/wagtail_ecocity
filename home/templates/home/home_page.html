@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{%load wagtailimages_tags %}
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+    {% image page.cover original as cover %}
+     <div class="jumbotron jumbotron-fluid" style="background: url({{cover.url}}) center center no-repeat;">
+          <div class='container'>
+            {% image page.profile_picture original as profile %}
+              <div class='useavatar col-md-6 '>
+                  <img src='{{profile.url}}' class='img-rounded' >
+              </div>
+
+              <div class='col-md-6'>
+                  <h1 class='display-3 bg-inverse' style='color:white;'>{{ page.title}}</h1>
+                  <div class='card bg-success'>
+                    <div class='card-block'>
+                      <p class='lead card-text' style='background:springgreen'>{{ page.welcome_text | richtext}}</p>
+                    </div>
+                  </div>
+                  <a class='btn btn-lg btn-success' href='/registration'> Join us </a>
+              </div>
+
+        </div>
+     </div>
+     <div class="jumbotron jumbotron-fluid">
+          <div class='container'>
+            <p class='lead'>{{ page.body | richtext}} </p>
+          </div>
+     </div>
+
+     <div class="jumbotron jumbotron-fluid" style='background:yellowgreen;color:white;'>
+          <div class='container'>
+            <p class='lead'>{{ page.footer_message}}</p>
+          </div>
+     </div>
+
+
+{% endblock %}

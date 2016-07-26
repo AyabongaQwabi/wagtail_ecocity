@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% load widget_tweaks %}
+
+{% block body_class %}templates-registration{% endblock %}
+
+{% block content%}
+
+  <div class="jumbotron jumbotron-fluid bg-success">
+
+       <div class='container'>
+         <h1 class='display-3'>{{ page.title }}</h1>
+         <p class='lead'>{{ page.intro|richtext }}</p>
+       </div>
+ </div>
+
+ <div class='jumbotron'>
+    <div class='container'>
+       <form action="{% pageurl page %}" method="POST">
+          <fieldset class="form-group">
+           {% csrf_token %}
+           {% for field in form %}
+           <div class="form-group row">
+              <div style="color:red;list-style:none;" >{{field.errors}}</div>
+              <label for="inputEmail3" class="col-sm-2 form-control-label">{{field.label}}</label>
+              <div class="col-sm-10">
+                  {% render_field field class+='form-control' placeholder=field.help_text %}
+              </div>
+          </div>
+          {% endfor %}
+           <input type="submit" class='btn btn-lg btn-success'>
+           <a class='btn btn-lg btn-danger' href='/'> Cancel</a>
+         </fieldset>
+       </form>
+    </div>
+</div>
+{% endblock %}

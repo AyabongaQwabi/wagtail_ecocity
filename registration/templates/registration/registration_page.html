@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}templates-registration{% endblock %}
+
+{% block content%}
+
+  <div class="jumbotron jumbotron-fluid">
+      <h1>{{ page.title }}</h1>
+       <div class='container'>
+         <p class='lead'>{{ page.intro|richtext }}</p>
+       </div>
+
+      <form action="{% pageurl page %}" method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit">
+      </form>
+</div>
+{% endblock %}
